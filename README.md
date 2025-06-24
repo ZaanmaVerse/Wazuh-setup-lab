@@ -49,11 +49,11 @@ This project demonstrates the integration of **Wazuh** (HIDS) and **Suricata** (
 ## 📷 Screenshots
 
 ### Dashboard
-![Log Alerts](assets/Dashboard_Wazuh.png)
+![Log Alerts](Dashboard_Wazuh.png)
 
 ### 📈 Alert Visualization
-![Log Alerts](assets/Log_alert.png)
-![Log Alerts](assets/Log_alert1.png)
+![Log Alerts](Log_alert1.png)
+![Log Alerts](Log_alert.png)
 
 ---
 
