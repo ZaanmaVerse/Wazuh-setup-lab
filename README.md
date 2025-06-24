@@ -48,11 +48,12 @@ This project demonstrates the integration of **Wazuh** (HIDS) and **Suricata** (
 
 ## 📷 Screenshots
 
-### 🔍 Kibana Discover View
-![Kibana Discover](assets/kibana_discover.png)
+### Dashboard
+![Log Alerts](assets/Dashboard_Wazuh.png)
 
 ### 📈 Alert Visualization
-![Kibana Alerts](assets/alert_chart.png)
+![Log Alerts](assets/Log_alert.png)
+![Log Alerts](assets/Log_alert1.png)
 
 ---
 
