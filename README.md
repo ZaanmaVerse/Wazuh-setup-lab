@@ -28,10 +28,6 @@ v
 | (Ubuntu Server) |
 +------------------+
 
-yaml
-Salin
-Edit
-
 - **VM1**: Wazuh Server + Dashboard  
 - **VM2**: Wazuh Agent (target machine)  
 - **VM3**: Wazuh Agent + Suricata (NIDS sensor)  
@@ -52,64 +48,35 @@ Edit
 ## ⚙️ How to Deploy
 
 ### 1. Clone this repository
-```bash
+
 git clone https://github.com/yourusername/wazuh-suricata-project.git
 cd wazuh-suricata-project
 2. Configure Wazuh Agents
 Install agent on VM2 and VM3
 
 Register with Wazuh Manager using:
-
-bash
-Salin
-Edit
 /var/ossec/bin/agent-auth -m <WAZUH_SERVER_IP>
+
 3. Install & Configure Suricata on VM3
-bash
-Salin
-Edit
 sudo apt update && sudo apt install suricata
 sudo suricata -c /etc/suricata/suricata.yaml -i eth1
+
 4. Forward Suricata Logs to Wazuh Agent
 Edit ossec.conf on VM3 agent:
 
-xml
-Salin
-Edit
 <localfile>
   <log_format>json</log_format>
   <location>/var/log/suricata/eve.json</location>
 </localfile>
+
 5. Access Wazuh Dashboard
 Open your browser:
 
-cpp
-Salin
-Edit
 https://<WAZUH_SERVER_IP>
-📁 Project Structure
-pgsql
-Salin
-Edit
-├── wazuh-suricata-project/
-│   ├── docs/
-│   │   └── architecture.png
-│   ├── configs/
-│   │   ├── suricata.yaml
-│   │   └── ossec.conf
-│   ├── rules/
-│   │   └── local_rules.xml
-│   ├── screenshots/
-│   │   └── attack-detected.png
-│   └── README.md
-📸 Screenshots
-Simulated Attack	Wazuh Alert
 
 📚 References
 Wazuh Documentation
-
 Suricata Docs
-
 Wazuh + Suricata Integration Guide
 
 🧑‍💻 Author
