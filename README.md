@@ -1,86 +1,114 @@
-# 🔐 SIEM Integration Project: Wazuh + Suricata
+# 🛡️ Wazuh + Suricata Integration for Threat Detection
 
-This project demonstrates a **Security Information and Event Management (SIEM)** solution using **Wazuh** as the Host-based Intrusion Detection System (HIDS) and **Suricata** as the Network-based Intrusion Detection System (NIDS).
-
-> 🎓 Developed as a student project to explore real-world threat monitoring and detection on a multi-VM lab environment.
-
----
+This project demonstrates the integration of **Wazuh** (HIDS) and **Suricata** (NIDS) in a simulated lab environment to detect and analyze security threats in real-time.
 
 ## 📌 Project Objectives
 
-- Integrate **Wazuh** and **Suricata** for endpoint and network threat detection.
-- Simulate real attacks using **Kali Linux** and observe detection in **Wazuh Dashboard**.
-- Learn and apply best practices in security monitoring, event correlation, and alerting.
+- Implement a SIEM system using Wazuh and Suricata.
+- Simulate network attacks and analyze the alerts generated.
+- Understand how HIDS and NIDS work together for better threat visibility.
 
 ---
 
-## 🧱 Architecture
+## 🖥️ Lab Architecture
 
-+----------------+ Internal Network +------------------+
-| Kali Linux | <-----------------------> | Ubuntu (Agent + |
-| (Attacker VM) | | Suricata Sensor)|
-+----------------+ +------------------+
-|
-| Agent
-v
-+------------------+
-| Wazuh Server |
-| (Ubuntu Server) |
-+------------------+
+```
+[ Kali Linux ] → (Simulated Attacks)
+         |
+[ Ubuntu VM with Suricata + Wazuh Agent ]
+         |
+[ Wazuh Server ]
+```
 
-- **VM1**: Wazuh Server + Dashboard  
-- **VM2**: Wazuh Agent (target machine)  
-- **VM3**: Wazuh Agent + Suricata (NIDS sensor)  
-- **VM4**: Kali Linux (attack simulator)
+- **Wazuh Server:** Collects and visualizes alerts.
+- **Wazuh Agent + Suricata:** Installed on monitored VM to detect host and network threats.
+- **Kali Linux:** Used to simulate attacks (e.g., Nmap scan, malware traffic, brute force).
+
+---
+
+## ⚙️ Tools & Technologies
+
+| Tool         | Function                          |
+|--------------|-----------------------------------|
+| Wazuh        | Host-based Intrusion Detection    |
+| Suricata     | Network Intrusion Detection System|
+| Kali Linux   | Attack simulation                 |
+| VirtualBox   | VM virtualization                 |
 
 ---
 
 ## 🚀 Features
 
-- ✅ Wazuh Agent and Server communication setup
-- ✅ Suricata rules & signatures for network-based detection
-- ✅ Integration logs forwarded to Wazuh Manager
-- ✅ Custom alert rules and monitoring via dashboard
-- ✅ Simulated attacks: Nmap, brute-force, and reverse shell
+- ✅ Real-time alert monitoring via Kibana
+- ✅ Detection of malicious traffic (e.g., spyware, trojan, PUP)
+- ✅ Integration of Suricata logs into Wazuh alert engine
+- ✅ Visualization of Suricata alerts in Wazuh dashboard
 
 ---
 
-## ⚙️ How to Deploy
+## 📷 Screenshots
 
-### 1. Clone this repository
+### 🔍 Kibana Discover View
+![Kibana Discover](assets/kibana_discover.png)
 
-git clone https://github.com/yourusername/wazuh-suricata-project.git
-cd wazuh-suricata-project
-2. Configure Wazuh Agents
-Install agent on VM2 and VM3
+### 📈 Alert Visualization
+![Kibana Alerts](assets/alert_chart.png)
 
-Register with Wazuh Manager using:
-/var/ossec/bin/agent-auth -m <WAZUH_SERVER_IP>
+---
 
-3. Install & Configure Suricata on VM3
-sudo apt update && sudo apt install suricata
-sudo suricata -c /etc/suricata/suricata.yaml -i eth1
+## 🧪 Attack Simulation Examples
 
-4. Forward Suricata Logs to Wazuh Agent
-Edit ossec.conf on VM3 agent:
+| Attack Type             | Tool Used     | Detected Alert                           |
+|--------------------------|---------------|-------------------------------------------|
+| Port Scanning           | Nmap          | Suricata: ET SCAN Nmap Scripting Engine   |
+| Malicious Beaconing     | Custom PCAP   | Suricata: ET MALWARE CnC Beacon Detected  |
+| Brute-force SSH         | Hydra         | Wazuh: SSH brute force attempt            |
 
-<localfile>
-  <log_format>json</log_format>
-  <location>/var/log/suricata/eve.json</location>
-</localfile>
+---
 
-5. Access Wazuh Dashboard
-Open your browser:
+## 📚 What I Learned
 
-https://<WAZUH_SERVER_IP>
+- How to configure and manage a Wazuh SIEM setup
+- Integrating Suricata with Wazuh for comprehensive threat detection
+- Analyzing network and host logs effectively
+- Realizing the power of HIDS + NIDS combination
 
+---
+
+## 🔧 How to Run (Simplified)
+
+> All components run on separate VirtualBox VMs.
+
+1. Clone this repo
+2. Follow installation guides:
+   - [Wazuh Installation Guide](https://documentation.wazuh.com/current/installation-guide/)
+   - [Suricata Install Docs](https://suricata.io/docs/)
+3. Configure `ossec.conf` and Suricata Eve JSON output
+4. Start Wazuh agent and Suricata
+5. Launch Kibana to view alerts
+
+---
+
+## 📁 Project Structure
+
+```
+wazuh-suricata-project/
+│
+├── config/                   # Configuration files
+├── docs/                     # Documentation & diagrams
+├── logs/                     # Sample logs (sanitized)
+├── assets/                   # Screenshots for README
+└── README.md                 # This file
+```
+
+---
 📚 References
 Wazuh Documentation
 Suricata Docs
 Wazuh + Suricata Integration Guide
 
-🧑‍💻 Author
-Zaidan Mahfudz Azzam
-Information Technology Student | Cybersecurity Enthusiast
+## 📬 Contact
 
-📫 Reach me on LinkedIn or via Email
+**Zaidan Mahfudz Azzam Saidi**  
+_Information Technology Student | Cybersecurity Enthusiast_  
+📧 [LinkedIn](https://linkedin.com/in/zaidanmahfudz) | 🌐 [GitHub](https://github.com/ZaanmaVerse)
